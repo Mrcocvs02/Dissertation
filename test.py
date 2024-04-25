@@ -16,42 +16,42 @@ print(x_test.shape)
 
 encoding_dim=32
 
-input_img = keras.Input(shape=(748,))
+input_img = keras.Input(shape=(784,))
 encoded =layers.Dense(encoding_dim, activation='relu')(input_img)
-decoded = layers.Dense(748, activation='sigmoid)(encoded))
+decoded = layers.Dense(784, activation='sigmoid')(encoded)
 
 autoencoder = keras.Model(input_img, decoded)
 
 encoder = keras.Model(input_img, encoded)
 
-encodedencoded_input = keras.Input(shape=(encoding_dim,))
-decoder_layer = autencoder .layerslayers[-1]
+encoded_input = keras.Input(shape=(encoding_dim,))
+decoder_layer = autoencoder.layers[-1]
 decoder = keras.Model(encoded_input, decoder_layer(encoded_input))
 
 autoencoder.compile(optimizer = 'adam' ,loss='binary_crossentropy')
 autoencoder.fit(x_train,x_train,
-    epochs=2,
+    epochs=1,
     batch_size=64,
     shuffle=True,
     validation_data=(x_test,x_test))
 
 encoded_imgs = encoder.predict(x_test)
-decoded_imgs = predict.predict(encoded_img)
+decoded_imgs = decoder.predict(encoded_imgs)
 
 n=10
 plt.figure(figsize=(20,4))
 for i in range(n):
-    ax =plt.subplot(2,n,i+1)    ax =plt.subplot(2,n,i+1)
+    ax =plt.subplot(2,n,i+1)
     plt.imshow(x_test[i].reshape(28,28))
     plt.gray()
-    ax.get_xaxis()set_visible(false)
-    ax.get_yaxis()set_visible(false)
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
        
     ax =plt.subplot(2,n,i+1+n)
-    plt. imshow(decoded_imgs[i].reshape(28,28))
+    plt.imshow(decoded_imgs[i].reshape(28,28))
     plt.gray()
-    ax.get_xaxis()set_visible(false)
-    ax.get_yaxis()set_visible(false)
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
         
 plt.show()
 
